@@ -74,12 +74,12 @@ const getBet = (balance, bettingLinesCount) => {
 };
 
 const spin = () => {
-    const symbols = [];
+    const symbolsTotal = [];
     for (const [symbol, occurence] of Object.entries(SYMBOLS_OCCURENCES))
     {
         for (let i = 0; i < occurence; i++)
         {
-            symbols.push(symbol);
+            symbolsTotal.push(symbol);
         }
     }
 
@@ -87,7 +87,7 @@ const spin = () => {
     for (let i = 0; i < COLS; i++)
     {
         reels.push([]);
-        const reelSymbols = [...symbols];
+        const reelSymbols = [...symbolsTotal];
         
         for (let j = 0; j < ROWS; j++)
         {
@@ -102,8 +102,46 @@ const spin = () => {
     return reels;
 };
 
+const transpose = (reels) => {
+    const transposedRows = [];
+
+    for (let i = 0; i < ROWS; i++)
+    {
+        transposedRows.push([]);
+
+        for (let j = 0; j < COLS; j++)
+        {
+            transposedRows[i].push(reels[j][i]);
+        }
+    }
+
+    return transposedRows;
+};
+
+const printSpin = (spin) => {
+    for (const row of spin)
+    {
+        let rowString = "";
+
+        for (let i = 0; i < row.length; i++)
+        {
+            rowString += row[i];
+
+            if (i != row.length - 1)
+            {
+                rowString += " | ";    
+            }
+        }
+
+        console.log(rowString);
+    }
+};
+
 let balance = deposit();
 const bettingLinesCount = getNumberOfLines();
 const bet = getBet(balance, bettingLinesCount);
 
 const reels = spin();
+const transposed = transpose(reels);
+
+printSpin(transposed);
