@@ -1,4 +1,4 @@
-# JS-Demo - Slot Machine
+# :slot_machine: JS-Demo - Slot Machine :slot_machine:
 This is fairly simple project in which I have practiced basic JavaScript coding. The slot machine operates as follows:
 1. First, the user enters a valid deposit amount.
 2. Then, the user must specify the number of lines they want to bet on. The minimum is one line and the maximum is three lines.
