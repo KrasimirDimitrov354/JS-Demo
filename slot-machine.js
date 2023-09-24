@@ -174,12 +174,12 @@ const game = () => {
         
         const winnings  = getWinnings(transposed, bet, bettingLines);
         balance += winnings;
-
-        console.log("Your current balance is " + balance + ".");
+  
         if (balance <= 0) {
             console.log("Game Over!");
             break;
         } else {
+            console.log("Your current balance is " + balance + ".");
             const playAgain = prompt("Do you want to continue playing? (y/n) ");
             if (playAgain != 'y') {
                 console.log("Come back soon!");
