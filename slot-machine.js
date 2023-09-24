@@ -158,13 +158,35 @@ const getWinnings = (spinArray, betAmount, bettingLines) => {
     return winnings;
 };
 
-let balance = deposit();
-const bettingLines = getNumberOfLines();
-const bet = getBet(balance, bettingLines);
+const game = () => {
+    let balance = deposit();
 
-const reels = spin();
-const transposed = transpose(reels);
+    while (true) {
+        const bettingLines = getNumberOfLines();
+        const bet = getBet(balance, bettingLines);
+        
+        balance -= bet * bettingLines;
 
-printSpin(transposed);
+        const reels = spin();
+        const transposed = transpose(reels);
+        
+        printSpin(transposed);
+        
+        const winnings  = getWinnings(transposed, bet, bettingLines);
+        balance += winnings;
 
-const winnings = getWinnings(transposed, bet, bettingLines);
+        console.log("Your current balance is " + balance + ".");
+        if (balance <= 0) {
+            console.log("Game Over!");
+            break;
+        } else {
+            const playAgain = prompt("Do you want to continue playing? (y/n) ");
+            if (playAgain != 'y') {
+                console.log("Come back soon!");
+                break;
+            } 
+        }
+    }  
+}
+
+game();
